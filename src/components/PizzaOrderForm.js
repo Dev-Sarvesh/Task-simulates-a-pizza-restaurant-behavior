@@ -1,4 +1,3 @@
-// components/PizzaOrderForm.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { placeOrder, moveOrder } from '../actions';
@@ -16,17 +15,14 @@ const PizzaOrderForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if the maximum order limit is reached
     if (orders.length >= maxOrders) {
       alert('Not taking any more orders for now. Please try again later.');
       return;
     }
 
-    // Validation and dispatch the action to place the order
     if (type !== null && size !== null && base !== null) {
       const newOrder = { id: orders.length + 1, type, size, base, timePlaced: 0 }; // Initialize timePlaced to 0
       dispatch(placeOrder(newOrder));
-      // Reset form after placing the order
       setType(null);
       setSize(null);
       setBase(null);
@@ -34,15 +30,13 @@ const PizzaOrderForm = () => {
   };
 
   const handleNext = (orderId) => {
-    // Move the order to the next stage
     dispatch(moveOrder(orderId));
   };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      // Update the order timeSpent every second
       dispatch(moveOrder());
-    }, 1000); // 1000 milliseconds = 1 second
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, [dispatch]);
@@ -83,11 +77,10 @@ const PizzaOrderForm = () => {
           {orders.map((order) => (
             <div
               key={order.id}
-              className={`order-card ${
-                order.stage === 'in-progress' && order.timeSpentInCurrentStage > 180
+              className={`order-card ${order.stage === 'in-progress' && order.timeSpentInCurrentStage > 180
                   ? 'overdue'
                   : ''
-              }`}
+                }`}
             >
               <p>Order Number: {order.id}</p>
               <p>Type: {order.type}</p>
@@ -106,7 +99,6 @@ const PizzaOrderForm = () => {
   );
 };
 
-// Helper function to format time in mm:ss
 const formatTime = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;

@@ -18,8 +18,8 @@
 }
 
 .order-ready {
-  background-color: #ff9999; /* Red highlighting for orders ready for more than 3 min */
+  background-color: #ff9999; 
 }
 .order-card.overdue {
-  background-color: #ff9999; /* Red background for overdue orders */
+  background-color: #ff9999; 
 }

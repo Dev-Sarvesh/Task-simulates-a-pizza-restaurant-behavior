@@ -1,4 +1,3 @@
-// actions.js
 export const placeOrder = (order) => ({
     type: 'PLACE_ORDER',
     payload: order,
